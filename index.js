@@ -13,12 +13,13 @@ let mainWindow;
 
 function createMainWindow() {
 	const win = new BrowserWindow({
-		width: 600,
-		height: 400,
+		width: 1200,
+		height: 800,
 		resizable: false
 	});
 
 	win.loadUrl(`file://${__dirname}/index.html`);
+	win.openDevTools();
 	win.on('closed', onClosed);
 
 	return win;
