@@ -18,8 +18,8 @@
     "test": "mocha --require espower-traceur/guess --compilers ts:espower-typescript/guess --recursive && xo",
     "watch": "watch 'npm run tsc && npm run babel' ./src",
     "tsc": "tsc src/**/*.ts --outDir build/src --module commonjs --sourceMap && node ./sourcemapinliner.js",
-    "babel": "babel src/*.jsx src/**/*.jsx -s inline -m commonStrict -d build",
-    "watchify": "watchify build/src/main.js -d -s App -o build/bundle.js",
+    "babel": "babel src/*.jsx src/**/*.jsx src/*.js -s inline -m commonStrict -d build --optional runtime",
+    "watchify": "watchify build/src/main.js build/src/root.js -d -s App -o build/bundle.js",
     "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=0.31.1"
   },
   "files": [
@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "babel": "^5.8.23",
+    "babel-runtime": "^5.8.20",
     "browserify": "^11.0.1",
     "convert-source-map": "^1.1.1",
     "electron-packager": "^5.0.0",
