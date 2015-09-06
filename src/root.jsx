@@ -1,18 +1,30 @@
 
 import * as React from 'react';
-import * as Redux from 'redux';
-import * as ReactRedux from 'react-redux';
+import { compose, createStore, applyMiddleware } from 'redux';
+import { devTools, persistState } from 'redux-devtools';
+import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
+import { Provider } from 'react-redux';
+import * as ReduxThunk from 'redux-thunk';
 import App from './containers/App';
 import todoApp from './reducers';
 
-let createStore = Redux.createStore;
-let Provider = ReactRedux.Provider;
+const finalCreateStore = compose(
+	applyMiddleware(ReduxThunk),
+	devTools(),
+	persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+)(createStore);
 
-let store = createStore(todoApp);
+let store = finalCreateStore(todoApp);
 
 React.render(
-	<Provider store={store}>
-		{() => <App />}
-	</Provider>,
+	<div>
+		<Provider store={store}>
+			{() => <App />}
+		</Provider>
+		<DebugPanel top right bottom>
+			<DevTools store={store} monitor={LogMonitor} />
+		</DebugPanel>
+	</div>
+	,
 	document.getElementById('root')
 );
