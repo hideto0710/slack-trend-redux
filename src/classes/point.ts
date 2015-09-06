@@ -1,6 +1,3 @@
-/**
- * Created by hideto0710 on 9/5/15.
- */
 
 class Point {
 	x: number;

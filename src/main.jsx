@@ -1,6 +1,3 @@
-/**
- * Created by hideto0710 on 9/5/15.
- */
 
 import * as React from 'react'
 
@@ -18,7 +15,7 @@ class App extends React.Component {
 	}
 
 	render() {
-		const token = '<token>';
+		const token = 'xoxp-2545467001-2590832085-8204951602-d33907';
 		const url = 'https://slack.com/api/channels.list?exclude_archived=random&pretty=1';
 		return(
 			<div className="container">

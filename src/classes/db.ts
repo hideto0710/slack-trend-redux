@@ -1,7 +1,4 @@
 /// <reference path="../../typings/pouchDB/pouch" />
-/**
- * Created by hideto0710 on 9/6/15.
- */
 
 import * as PouchDB from 'pouchdb'
 
