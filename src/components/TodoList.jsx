@@ -2,6 +2,8 @@
 import * as React from 'react';
 import Todo from './Todo';
 
+let PropTypes = React.PropTypes;
+
 export default class TodoList extends React.Component {
 	render() {
 		return (
@@ -17,9 +19,11 @@ export default class TodoList extends React.Component {
 }
 
 TodoList.propTypes = {
-	onTodoClick: React.PropTypes.func.isRequired,
-	todos: React.PropTypes.arrayOf(React.PropTypes.shape({
-		text: React.PropTypes.string.isRequired,
-		completed: React.PropTypes.bool.isRequired
-	}).isRequired).isRequired
+	onTodoClick: PropTypes.func.isRequired,
+	todos: PropTypes.arrayOf(
+		PropTypes.shape({
+			text: PropTypes.string.isRequired,
+			completed: PropTypes.bool.isRequired
+		}).isRequired
+	).isRequired
 };

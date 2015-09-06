@@ -1,6 +1,6 @@
 
-import * as React from 'react'
-import * as request from 'superagent'
+import * as React from 'react';
+import * as request from 'superagent';
 
 class ApiResponse extends React.Component {
 	constructor(props) {

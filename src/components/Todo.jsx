@@ -1,6 +1,8 @@
 
 import * as React from 'react';
 
+let PropTypes = React.PropTypes;
+
 export default class Todo extends React.Component {
 	render() {
 		return (
@@ -17,7 +19,7 @@ export default class Todo extends React.Component {
 }
 
 Todo.propTypes = {
-	onClick: React.PropTypes.func.isRequired,
-	text: React.PropTypes.string.isRequired,
-	completed: React.PropTypes.bool.isRequired
+	onClick: PropTypes.func.isRequired,
+	text: PropTypes.string.isRequired,
+	completed: PropTypes.bool.isRequired
 };
