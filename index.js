@@ -1,14 +1,11 @@
 'use strict';
+
 const app = require('app');
 const BrowserWindow = require('browser-window');
 
-// report crashes to the Electron project
 require('crash-reporter').start();
-
-// adds debug features like hotkeys for triggering dev tools and reload
 require('electron-debug')();
 
-// prevent window being GC'd
 let mainWindow;
 
 function createMainWindow() {
@@ -26,8 +23,6 @@ function createMainWindow() {
 }
 
 function onClosed() {
-	// deref the window
-	// for multiple windows store them in an array
 	mainWindow = null;
 }
 
