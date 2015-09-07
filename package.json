@@ -14,12 +14,15 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "npm run watch & npm run watchify & electron .",
+    "start": "electron .",
+    "dev": "npm run tsc & npm run babel & npm run browserify",
+    "devWatch": "npm run watch & npm run watchify",
     "test": "mocha --require espower-traceur/guess --compilers ts:espower-typescript/guess --recursive && xo",
     "watch": "watch 'npm run tsc && npm run babel' ./src",
     "tsc": "tsc src/**/*.ts --outDir build/src --module commonjs --sourceMap && node ./sourcemapinliner.js",
-    "babel": "babel src/*.jsx src/**/*.jsx src/*.js -s inline -m commonStrict -d build --optional runtime",
-    "watchify": "watchify build/src/main.js build/src/root.js -d -s App -o build/bundle.js",
+    "babel": "babel src/*.jsx src/**/*.jsx src/*.js -s inline -m commonStrict -d build --optional runtime --stage 0",
+    "browserify": "browserify build/src/root.js -d -s App -o build/bundle.js",
+    "watchify": "watchify build/src/root.js -d -s App -o build/bundle.js",
     "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=0.31.1"
   },
   "files": [
@@ -32,9 +35,11 @@
   ],
   "dependencies": {
     "electron-debug": "^0.1.1",
+    "material-ui": "^0.11.0",
     "pouchdb": "^4.0.1",
     "react": "^0.13.3",
     "react-redux": "^2.1.0",
+    "react-tap-event-plugin": "^0.1.7",
     "redux": "^2.0.0",
     "redux-thunk": "^0.1.0",
     "superagent": "^1.3.0"

@@ -1,30 +1,24 @@
 
 import * as React from 'react';
-import { compose, createStore, applyMiddleware } from 'redux';
-import { devTools, persistState } from 'redux-devtools';
-import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import * as ReduxThunk from 'redux-thunk';
+
 import App from './containers/App';
+
 import todoApp from './reducers';
 
-const finalCreateStore = compose(
-	applyMiddleware(ReduxThunk),
-	devTools(),
-	persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
-)(createStore);
+import * as injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
-let store = finalCreateStore(todoApp);
+let store = createStore(todoApp);
 
 React.render(
 	<div>
 		<Provider store={store}>
 			{() => <App />}
 		</Provider>
-		<DebugPanel top right bottom>
-			<DevTools store={store} monitor={LogMonitor} />
-		</DebugPanel>
 	</div>
 	,
-	document.getElementById('root')
+	document.getElementById('app')
 );

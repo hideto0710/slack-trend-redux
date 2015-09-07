@@ -1,22 +1,22 @@
 
 import * as React from 'react'
 
-import ApiResponse from './components/ApiResponse'
+import ApiResponse from '../components/ApiResponse'
 
-import Point from './classes/point'
-import NewPoint from './components/newPoint'
+import Point from '../classes/point'
+import NewPoint from '../components/newPoint'
 
 let point = new Point(1,70);
 let newPoint = new NewPoint(1,70);
 
-class App extends React.Component {
+class Electron extends React.Component {
 	constructor(props) {
 		super(props);
 	}
 
 	render() {
 		const token = 'xoxp-2545467001-2590832085-8204951602-d33907';
-		const url = 'https://slack.com/api/channels.list?exclude_archived=random&pretty=1';
+		const url = 'https://slack.com/api/channels.list';
 		return(
 			<div className="container">
 				<header>
@@ -30,7 +30,4 @@ class App extends React.Component {
 	}
 }
 
-React.render(
-	<App />,
-	document.getElementById('app')
-);
+export default Electron
