@@ -7,6 +7,8 @@ let Colors = Styles.Colors;
 class Sidebar extends React.Component {
 
 	static propTypes = {
+		channels: React.PropTypes.array.isRequired,
+		onChannelClick: React.PropTypes.func.isRequired,
 		style: React.PropTypes.object
 	};
 
@@ -14,7 +16,7 @@ class Sidebar extends React.Component {
 		sidebar: {
 			position: 'fixed',
 			zIndex: 10000,
-			overflow: 'hidden',
+			overflow: 'scroll',
 			opacity: 1,
 			left: 0,
 			top: 0,
@@ -27,7 +29,7 @@ class Sidebar extends React.Component {
 		},
 		sidebarDOM: {
 			position: 'relative',
-			overflowY: 'hidden',
+			overflowY: 'scroll',
 			width: '100%',
 			height: '100%',
 			backgroundColor: Colors.blueGrey800
@@ -41,14 +43,18 @@ class Sidebar extends React.Component {
 	};
 
 	render() {
-		const { style } = this.props;
+		const { channels, style, onChannelClick } = this.props;
 		let styleObj = Object.assign({}, this.style.sidebar, style);
 		return(
 			<div style={styleObj}>
 				<div style={this.style.sidebarDOM}>
 					<List style={this.style.list}>
-						<ListItem primaryText="Inbox" style={this.style.item} />
-						<ListItem primaryText="Starred" style={this.style.item} />
+						{channels.map((channel, index) =>
+								<ListItem key={index}
+									primaryText={channel.name}
+									onClick={() => onChannelClick(index)}
+									style={this.style.item}/>
+						)}
 					</List>
 				</div>
 			</div>

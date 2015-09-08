@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "electron .",
-    "dev": "npm run tsc & npm run babel & npm run browserify",
+    "dev": "npm run tsc & npm run babel && npm run browserify",
     "devWatch": "npm run watch & npm run watchify",
     "test": "mocha --require espower-traceur/guess --compilers ts:espower-typescript/guess --recursive && xo",
     "watch": "watch 'npm run tsc && npm run babel' ./src",
@@ -35,6 +35,7 @@
   ],
   "dependencies": {
     "electron-debug": "^0.1.1",
+    "lodash": "^3.10.1",
     "material-ui": "^0.11.0",
     "pouchdb": "^4.0.1",
     "react": "^0.13.3",

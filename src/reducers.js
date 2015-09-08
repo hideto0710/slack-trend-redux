@@ -1,40 +1,21 @@
 
-import { combineReducers } from 'redux';
-import { ADD_TODO, COMPLETE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters } from './actions';
-const { SHOW_ALL } = VisibilityFilters;
+import { SET_CHANNELS, SELECT_CHANNEL, setChannels, selectChannel } from './actions/channels';
+import { Channel } from './classes/Channel';
 
-function visibilityFilter(state = SHOW_ALL, action = null) {
+export function channels(state = [], action = null) {
 	switch (action.type) {
-		case SET_VISIBILITY_FILTER:
-			return action.filter;
+		case SET_CHANNELS:
+			return action.channels;
 		default:
 			return state;
 	}
 }
 
-function todos(state = [], action = null) {
+export function channel(state = new Channel(), action = null) {
 	switch (action.type) {
-		case ADD_TODO:
-			return [...state, {
-				text: action.text,
-				completed: false
-			}];
-		case COMPLETE_TODO:
-			return [
-				...state.slice(0, action.index),
-				Object.assign({}, state[action.index], {
-					completed: true
-				}),
-				...state.slice(action.index + 1)
-			];
+		case SELECT_CHANNEL:
+		 	return action.channel;
 		default:
 			return state;
 	}
 }
-
-const todoApp = combineReducers({
-	visibilityFilter,
-	todos
-});
-
-export default todoApp;
