@@ -15,7 +15,7 @@ import { MSlackAPIClient } from '../classes/SlackAPIClient';
 
 let PropTypes = React.PropTypes;
 let ThemeManager = new mui.Styles.ThemeManager();
-let client = MSlackAPIClient.init('xoxp-2545467001-2590832085-8204951602-d33907');
+let client = MSlackAPIClient.init('<token>');
 
 class App extends React.Component {
 
