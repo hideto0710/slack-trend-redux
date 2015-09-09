@@ -1,7 +1,7 @@
 
-import * as React from 'react'
+import * as React from 'react';
 
-import { Channel } from '../classes/Channel';
+import {Channel} from '../classes/Channel';
 
 class Trend extends React.Component {
 	static propTypes = {
@@ -28,8 +28,8 @@ class Trend extends React.Component {
 	}
 
 	render() {
-		const { channel } = this.props;
-		return(
+		const {channel} = this.props;
+		return (
 			<div style={this.style.div}>
 				<h1 style={this.style.h1}>{channel.name}</h1>
 			</div>
@@ -37,4 +37,4 @@ class Trend extends React.Component {
 	}
 }
 
-export default Trend
+export default Trend;

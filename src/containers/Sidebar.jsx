@@ -1,8 +1,8 @@
 
 import * as React from 'react';
-import { List, ListItem, Styles } from 'material-ui';
+import {List, ListItem, Styles} from 'material-ui';
 
-let Colors = Styles.Colors;
+const Colors = Styles.Colors;
 
 class Sidebar extends React.Component {
 
@@ -43,9 +43,9 @@ class Sidebar extends React.Component {
 	};
 
 	render() {
-		const { channels, style, onChannelClick } = this.props;
-		let styleObj = Object.assign({}, this.style.sidebar, style);
-		return(
+		const {channels, style, onChannelClick} = this.props;
+		const styleObj = Object.assign({}, this.style.sidebar, style);
+		return (
 			<div style={styleObj}>
 				<div style={this.style.sidebarDOM}>
 					<List style={this.style.list}>
@@ -58,7 +58,7 @@ class Sidebar extends React.Component {
 					</List>
 				</div>
 			</div>
-		)
+		);
 	}
 }
 

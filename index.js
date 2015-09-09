@@ -10,9 +10,9 @@ let mainWindow;
 
 function createMainWindow() {
 	const win = new BrowserWindow({
-		width: 1200,
-		height: 800,
-		resizable: false
+		width: 1000,
+		height: 600,
+		resizable: true
 	});
 
 	win.loadUrl(`file://${__dirname}/index.html`);
