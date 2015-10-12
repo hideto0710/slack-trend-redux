@@ -4,29 +4,25 @@
 import * as request from 'superagent';
 import * as _ from 'lodash';
 
-export module MSlackAPIClient {
+export class  APIClient {
+	constructor() {
+	}
 
-	export let init = (token: string): SlackAPIClient => {
-		return new SlackAPIClient(token);
-	};
-
-	export let get = (url, query) => {
+	get(url: string, query: {}) {
 		return request.get(url).query(query);
-	};
+	}
 }
 
-export class SlackAPIClient {
-
-	token: string;
+export class SlackAPIClient extends APIClient{
 
 	private url = 'https://slack.com/api/';
 
-	constructor(token) {
-		this.token = token;
+	constructor(private token) {
+		super()
 	}
 
-	listChannels(excludeArchived: number = 0) {
+	public listChannels(excludeArchived: number = 0) {
 		let query = _.extend({ exclude_archived: excludeArchived.toString() }, { token: this.token });
-		return MSlackAPIClient.get(this.url + 'channels.list', query);
+		return this.get(this.url + 'channels.list', query);
 	}
 }

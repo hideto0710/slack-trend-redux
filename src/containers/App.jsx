@@ -1,25 +1,27 @@
 
 import * as React from 'react';
+// Redux
 import {connect} from 'react-redux';
-
-import * as mui from 'material-ui';
-
 import {setChannels, selectChannel} from '../actions/channels';
-
-import Sidebar from './Sidebar';
-import Trend from './Trend';
-
+// Class
 import SerializationHelper from '../classes/SerializationHelper';
 import {Channels, Channel} from '../classes/Channel';
-import {MSlackAPIClient} from '../classes/SlackAPIClient';
+import {SlackAPIClient} from '../classes/SlackAPIClient';
+// MaterialUI
+import * as mui from 'material-ui';
+// Component
+import {Sidebar, LEFT} from './Sidebar';
+import Trend from './Trend';
 
 const PropTypes = React.PropTypes;
+const client = new SlackAPIClient('xoxp-2545467001-2590832085-8204951602-d33907');
 const ThemeManager = new mui.Styles.ThemeManager();
-const client = MSlackAPIClient.init('<token>');
+const {List, ListItem, Styles} = mui;
+const Colors = Styles.Colors;
 
 class App extends React.Component {
 
-	// for MaterialUI
+	// MaterialUI
 	getChildContext() {
 		return {
 			muiTheme: ThemeManager.getCurrentTheme()
@@ -29,20 +31,10 @@ class App extends React.Component {
 		muiTheme: React.PropTypes.object
 	};
 
+	// React
 	static propTypes = {
 		channels: PropTypes.arrayOf(Channel),
 		channel: PropTypes.instanceOf(Channel)
-	};
-
-	style = {
-		sidebar: {
-			width: '20%'
-		},
-		main: {
-			height: '100%',
-			marginLeft: '20%',
-			padding: '24px'
-		}
 	};
 
 	componentWillMount() {
@@ -51,7 +43,7 @@ class App extends React.Component {
 			if (err) {
 				throw err;
 			}
-			const cs: Channels = SerializationHelper.toInstance(new Channels(), res.body);
+			const cs = SerializationHelper.toInstance(new Channels(), res.body);
 			dispatch(setChannels(cs.channels));
 			dispatch(selectChannel(cs.channels.filter(channel => channel.isMember)[0]));
 		});
@@ -59,10 +51,35 @@ class App extends React.Component {
 
 	render() {
 		const {dispatch, channels, channel} = this.props;
+		const styles = {
+			sidebar: {
+				width: '20%'
+			},
+			main: {
+				height: '100%',
+				marginLeft: '20%',
+				padding: '24px'
+			},
+			list: {
+				backgroundColor: Colors.blueGrey800
+			},
+			item: {
+				color: 'white'
+			}
+		};
 		return (
 			<div>
-				<Sidebar style={this.style.sidebar} channels={channels} onChannelClick={index => dispatch(selectChannel(channels[index]))} />
-				<div style={this.style.main}>
+				<Sidebar position={LEFT} style={styles.sidebar}>
+					<List style={styles.list}>
+						{channels.map((channel, index) =>
+							<ListItem key={index}
+								primaryText={channel.name}
+								onClick={() => dispatch(selectChannel(channel))}
+								style={styles.item} />
+						)}
+					</List>
+				</Sidebar>
+				<div style={styles.main}>
 					<Trend channel={channel}/>
 				</div>
 			</div>
