@@ -14,7 +14,7 @@ import {Sidebar, LEFT} from './Sidebar';
 import Trend from './Trend';
 
 const PropTypes = React.PropTypes;
-const client = new SlackAPIClient('xoxp-2545467001-2590832085-8204951602-d33907');
+const client = new SlackAPIClient('<Token>');
 const ThemeManager = new mui.Styles.ThemeManager();
 const {List, ListItem, Styles} = mui;
 const Colors = Styles.Colors;
